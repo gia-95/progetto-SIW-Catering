@@ -26,7 +26,7 @@
           </div>
           <div class="chef">
             <span>Chef:</span>
-            <span th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}">Mario</span>
+            <span th:if="${buffet.chef}" th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}">Mario</span>
           </div>
           <div class="primi">
             <h6>Primi piatti:</h6>

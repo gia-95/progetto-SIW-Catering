@@ -21,6 +21,8 @@ public class Piatto {
 	private String nome;
 	
 	private String descrizione;
+	
+	private String urlImg;
 
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<Ingrediente> ingredienti;
@@ -59,6 +61,14 @@ public class Piatto {
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+
+	public String getUrlImg() {
+		return urlImg;
+	}
+
+	public void setUrlImg(String urlImg) {
+		this.urlImg = urlImg;
 	}
 
 

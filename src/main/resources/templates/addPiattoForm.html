@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Aggiungi Piatto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="../css/addPiattoFormStyle.css">
+</head>
+<body>
+
+    <div class="container-fluid px-1 py-5 mx-auto">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                <h4 >C'è stato un errore nel salvataggio del buffet</h4>
+                <div class="card">
+                    <h3 class="text-center mb-4">Agggiungi un nuovo piatto</h3>
+                    <!-- LA 'ACTION' DEL FORM E' DA CAMBIARE; DEVI METTERLO SOTTO IL PATH 'ADMIN' QUANDO LO FARAI-->
+                    <!-- Quando viene aggiunto il buffet, mi risposto sulla pagina di tutti i buffet, -> dovrei visalizzare il nuovo buffet-->
+                    <form class="form-card" th:action="@{/piatti/addPiatto}" method="POST" th:object="${piatto}">
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Nome Buffet<span class="text-danger"> *</span></label> <input type="text" th:field="*{nome}" id="fname" name="fname" placeholder="Aggiungi nome del buffet"> </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Link immagine Buffet<span class="text-danger"> *</span></label> <input type="text" th:field="*{urlImg}" id="ans" name="ans" placeholder="Link immagine (.JPG / .PNG)"> </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Descrizione del buffet<span class="text-danger"> *</span></label> <input type="text" th:field="*{descrizione}" id="ans" name="ans" placeholder="" onblur="validate(6)"> </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Conferma</button> </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

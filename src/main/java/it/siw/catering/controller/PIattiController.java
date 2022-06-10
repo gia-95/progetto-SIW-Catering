@@ -6,9 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import it.siw.catering.model.Buffet;
 import it.siw.catering.model.Ingrediente;
 import it.siw.catering.model.Piatto;
 import it.siw.catering.repository.IngredienteRepository;
@@ -33,40 +37,22 @@ public class PIattiController {
 		return "piatti";
 	}
 
-	private void aggiungiIngrediente() {
-		Ingrediente uova = new Ingrediente();
-		uova.setNome("Uova");
-	
-		Ingrediente p = new Ingrediente();
-		p.setNome("Pancetta");
-		
-		Ingrediente pec = new Ingrediente();
-		pec.setNome("Pecorino");
-	
-		Ingrediente carneManzo = new Ingrediente("Carne di manzo");
-		Ingrediente carneVitello = new Ingrediente("Carne di vitello");
-		Ingrediente limone = new Ingrediente("Limone");
-		Ingrediente pomodoro = new Ingrediente("Pomodoro");
-		
+	@GetMapping("/addPiatto")
+	public String addPiatto(Model model) {
 
-		Piatto matriana = this.piattoService.getPiatto("Carbonara");
+		model.addAttribute("piatto", new Piatto());
 		
-//		ingredienteRepository.save(carneManzo);
-//		ingredienteRepository.save(carneVitello);
-//		ingredienteRepository.save(limone);
-//		ingredienteRepository.save(pomodoro);
-//
-//		Piatto matriana = this.piattoService.getPiatto("Matriciana");
-//		matriana.getIngredienti().add(pomodoro);
-//		matriana.getIngredienti().add(uo);
-//
-//		
-		
-		
-		
-		
-		piattoService.addPiatto(matriana);
-
+		return "addPiattoForm";
 	}
 
+	@PostMapping("/addPiatto")
+	public String addPiatto(@ModelAttribute("piatto") Piatto piatto, Model model, BindingResult bindingResult) {
+
+		if (!bindingResult.hasErrors()) {
+			this.piattoService.addPiatto(piatto);
+			return "redirect:/piatti";
+		}
+		return "addPiattoForm";
+	}
+	
 }

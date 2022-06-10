@@ -19,6 +19,8 @@ public class Buffet {
 	private Long id;
 
 	private String nome;
+	
+	private String descrizione;
 
 	private String urlImg;
 	
@@ -95,6 +97,14 @@ public class Buffet {
 	
 	public String getUrlImg() {
 		return urlImg;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 
 }

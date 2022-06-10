@@ -14,6 +14,10 @@ public class Ingrediente {
 	
 	private String nome;
 	
+	private String descrizione;
+	
+	private String urlImg;
+	
 	public Ingrediente() {	}
 
 	public Ingrediente(String nome) {
@@ -35,6 +39,22 @@ public class Ingrediente {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getUrlImg() {
+		return urlImg;
+	}
+
+	public void setUrlImg(String urlImg) {
+		this.urlImg = urlImg;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 
 
