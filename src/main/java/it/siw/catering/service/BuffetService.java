@@ -31,5 +31,10 @@ public class BuffetService {
 		Buffet buffetSaved = this.buffetRepository.save(buffet);
 		return buffetSaved != null;
 	}
+	
+	public Buffet getBuffetById (Long idBuffet) {
+		
+		return this.buffetRepository.findById(idBuffet).get();
+	}
 
 }
