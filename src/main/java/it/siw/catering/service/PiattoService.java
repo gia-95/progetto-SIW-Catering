@@ -32,9 +32,14 @@ public class PiattoService {
 		return piattoSaved != null;
 	}
 	
-	public Piatto getPiatto(String nomePiatto) {
+	public Piatto getPiattoByNome(String nomePiatto) {
 		
 		return this.piattoRepository.findByNome(nomePiatto).get();
 	}
 
+	public Piatto getPiattoById (Long idPiatto ) {
+		
+		return this.piattoRepository.findById(idPiatto).get();
+	}
+	
 }

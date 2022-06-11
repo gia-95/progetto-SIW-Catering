@@ -12,35 +12,103 @@
 
 <body>
 
-    <div class="container d-flex justify-content-center">
-
-        <ul class="list-group mt-5 text-white">
-            <li class="list-group-item d-flex justify-content-between align-content-center" th:each="primo : ${primiPiatti}">
-
-                <div class="d-flex flex-row">
-                    <div class="immagine" style="background-image: url(https://static.cookist.it/wp-content/uploads/sites/21/2020/05/6-falsi-miti-sulle-uova.jpg);"></div>
-                    <div class="ml-2 stacca">
-                        <h5 class="mb-0" th:text="${primo.nome}">Primopiatto</h5>
-                        <div class="about">
-                            <span th:text="${primo.descrizione}">descrzioneeee</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="check">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-x-circle" viewBox="0 0 16 16">
-                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                        <path
-                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                    </svg>
-                </div>
-
-            </li>
-
-        </ul>
-
+    <div class="titolo">
+        <h2>Primi Piatti</h2>
     </div>
+    <div class="contenitore" th:each="p : ${primiPiatti}">
+        <div class="rettangolo">
+            <div class="immagine" style="background-image: url(https://static.cookist.it/wp-content/uploads/sites/21/2020/05/6-falsi-miti-sulle-uova.jpg);">
+
+            </div>
+            <div class="contenitore-descrizione">
+                <h4  th:text="${p.nome}">Nome  piatto</h4>
+                <div class="desc-piatto"  th:text="${p.descrizione}">
+                    Descrizione
+                </div>
+            </div>
+            <div class="bottone-fine">
+                <div class="bottoni"><a class="btn btn-danger espandi" href="@{piatto/eliminaPiatto/{id}(id=${p.id})}" role="button">Rimuovi</a></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="aggiungiPiatto">
+        <form class="form-card" th:action="@{../aggiungiPrimoABuffet/{id}(id=${buffet.id})}" method="POST" th:object="${piatto}">
+            <select th:field="*{nome}" class="form-select" aria-label="Default select example">
+                <option th:each="p : ${listaPiatti}" th:value="${p.nome}" th:text="${p.nome}">
+                </option>
+            </select>
+            <div class="form-group col-sm-6"> <button type="submit" class="btn btn-success">Conferma</button> </div>
+        </form>
+    </div>
+    <hr>
+<!---------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+<div class="titolo">
+    <h2>Secondi Piatti</h2>
+</div>
+<div class="contenitore" th:each="p : ${secondiPiatti}">
+    <div class="rettangolo">
+        <div class="immagine" style="background-image: url(https://static.cookist.it/wp-content/uploads/sites/21/2020/05/6-falsi-miti-sulle-uova.jpg);">
+
+        </div>
+        <div class="contenitore-descrizione">
+            <h4  th:text="${p.nome}">Nome  piatto</h4>
+            <div class="desc-piatto"  th:text="${p.descrizione}">
+                Descrizione
+            </div>
+        </div>
+        <div class="bottone-fine">
+            <div class="bottoni"><a class="btn btn-danger espandi"  href="@{../../../../piatto/eliminaSecondoPiatto/{id}(id=${idBuffet})/{idP}(idP=${p.id})}" role="button">Rimuovi</a></div>
+        </div>
+    </div>
+</div>
+
+<div class="aggiungiPiatto">
+    <form class="form-card" th:action="@{../aggiungiSecondoABuffet/{id}(id=${buffet.id})}" method="POST" th:object="${piatto}">
+        <select th:field="*{nome}" class="form-select" aria-label="Default select example">
+            <option th:each="p : ${listaPiatti}" th:value="${p.nome}" th:text="${p.nome}">
+            </option>
+        </select>
+        <div class="form-group col-sm-6"> <button type="submit" class="btn btn-success">Conferma</button> </div>
+    </form>
+</div>
+<hr>
+<!---------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+<div class="titolo">
+    <h2>Dolci</h2>
+</div>
+<div class="contenitore" th:each="p : ${dolci}">
+    <div class="rettangolo">
+        <div class="immagine" style="background-image: url(https://static.cookist.it/wp-content/uploads/sites/21/2020/05/6-falsi-miti-sulle-uova.jpg);">
+
+        </div>
+        <div class="contenitore-descrizione">
+            <h4  th:text="${p.nome}">Nome piatto</h4>
+            <div class="desc-piatto"  th:text="${p.descrizione}">
+                Descrizione
+            </div>
+        </div>
+        <div class="bottone-fine">
+            <div class="bottoni"><a class="btn btn-danger espandi"  href="@{piatto/eliminaPiatto/{id}(id=${p.id})}" role="button">Rimuovi</a></div>
+        </div>
+    </div>
+</div>
+
+<div class="aggiungiPiatto">
+    <form class="form-card" th:action="@{../aggiungiDolceABuffet/{id}(id=${buffet.id})}" method="POST" th:object="${piatto}">
+        <select th:field="*{nome}" class="form-select" aria-label="Default select example">
+            <option th:each="p : ${listaPiatti}" th:value="${p.nome}" th:text="${p.nome}">
+            </option>
+        </select>
+        <div class="form-group col-sm-6"> <button type="submit" class="btn btn-success">Conferma</button> </div>
+    </form>
+</div>
+
+
 </body>
 
 </html>

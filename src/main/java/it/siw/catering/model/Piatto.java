@@ -26,6 +26,11 @@ public class Piatto {
 
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<Ingrediente> ingredienti;
+	
+	public Piatto(String nome) {
+		this.nome = nome;
+		this.ingredienti = new ArrayList<>();
+	}
 
 	public Piatto() {
 		this.ingredienti = new ArrayList<>();
