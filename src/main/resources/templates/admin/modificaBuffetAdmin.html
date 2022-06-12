@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="bottone-fine">
-                <div class="bottoni"><a class="btn btn-danger espandi" href="@{piatto/eliminaPiatto/{id}(id=${p.id})}" role="button">Rimuovi</a></div>
+                <div class="bottoni"><a class="btn btn-danger espandi" th:href="@{../eliminaPrimoPiatto/{idB}/{idP}(idB=${buffet.id}, idP=${p.id})}" role="button">Rimuovi</a></div>
             </div>
         </div>
     </div>
@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="bottone-fine">
-            <div class="bottoni"><a class="btn btn-danger espandi"  href="@{../../../../piatto/eliminaSecondoPiatto/{id}(id=${idBuffet})/{idP}(idP=${p.id})}" role="button">Rimuovi</a></div>
+            <div class="bottoni"><a class="btn btn-danger espandi"  th:href="@{../eliminaSecondoPiatto/{idB}/{idP}(idB=${buffet.id}, idP=${p.id})}" role="button">Rimuovi</a></div>
         </div>
     </div>
 </div>
@@ -93,7 +93,7 @@
             </div>
         </div>
         <div class="bottone-fine">
-            <div class="bottoni"><a class="btn btn-danger espandi"  href="@{piatto/eliminaPiatto/{id}(id=${p.id})}" role="button">Rimuovi</a></div>
+            <div class="bottoni"><a class="btn btn-danger espandi"  th:href="@{../eliminaDolce/{idB}/{idP}(idB=${buffet.id}, idP=${p.id})}" role="button">Rimuovi</a></div>
         </div>
     </div>
 </div>

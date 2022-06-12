@@ -33,6 +33,8 @@ public class AdminController {
 	@Autowired
 	private IngredientiService ingredientiService;
 
+	// ----------------------- BUFFET ----------------------------------------------------------------
+
 	@GetMapping(value = "/buffet")
 	public String getBuffet(Model model) {
 
@@ -75,7 +77,7 @@ public class AdminController {
 
 		buffet.getPrimiPiatti().add(piattoDaAggiungere);
 
-//		Ho aggiornato il vecchio buffet con il "nuovo" che ha il piatto in più
+		// Ho aggiornato il vecchio buffet con il "nuovo" che ha il piatto in più
 		buffetService.addBuffet(buffet);
 
 		return this.modificaBuffet(idBuffet, model);
@@ -90,7 +92,7 @@ public class AdminController {
 
 		buffet.getSecondiPiatti().add(piattoDaAggiungere);
 
-//		Ho aggiornato il vecchio buffet con il "nuovo" che ha il piatto in più
+		// Ho aggiornato il vecchio buffet con il "nuovo" che ha il piatto in più
 		buffetService.addBuffet(buffet);
 
 		return this.modificaBuffet(idBuffet, model);
@@ -105,40 +107,65 @@ public class AdminController {
 
 		buffet.getDolci().add(piattoDaAggiungere);
 
-//		Ho aggiornato il vecchio buffet con il "nuovo" che ha il piatto in più
+		// Ho aggiornato il vecchio buffet con il "nuovo" che ha il piatto in più
 		buffetService.addBuffet(buffet);
 
 		return this.modificaBuffet(idBuffet, model);
 	}
 
-	/**
-	 * DA SISTEMARE!!!!!!!!! ( Rimuovi piatto da buffet ( errore nel passaggio
-	 * parametri path )
-	 * 
-	 * @param idBuffet
-	 * @param idPiatto
-	 * @param model
-	 * @return
-	 */
-	@GetMapping(value = "piatto/eliminaSecondoPiatto/{idBuffet}/{idPiatto}")
+
+	@GetMapping(value = "buffet/eliminaPrimoPiatto/{idBuffet}/{idPiatto}")
+	public String eliminaPrimoPiatto(@PathVariable Long idBuffet, @PathVariable Long idPiatto, Model model) {
+
+		Buffet buffet = this.buffetService.getBuffetById(idBuffet);
+
+		for (Piatto piatto : buffet.getPrimiPiatti()) {
+			if (piatto.getId() == idPiatto) {
+				buffet.getPrimiPiatti().remove(piatto);
+				this.buffetService.addBuffet(buffet);
+				break;
+			}
+		}
+
+		String url = "redirect:/admin/buffet/modificaBuffet/" + idBuffet;
+
+		return url;
+	}
+	
+	@GetMapping(value = "buffet/eliminaSecondoPiatto/{idBuffet}/{idPiatto}")
 	public String eliminaSecondoPiatto(@PathVariable Long idBuffet, @PathVariable Long idPiatto, Model model) {
 
-		System.out.println("ciao");
+		Buffet buffet = this.buffetService.getBuffetById(idBuffet);
 
-		return null;
+		for (Piatto piatto : buffet.getSecondiPiatti()) {
+			if (piatto.getId() == idPiatto) {
+				buffet.getSecondiPiatti().remove(piatto);
+				this.buffetService.addBuffet(buffet);
+				break;
+			}
+		}
 
-//		Buffet buffet = this.buffetService.getBuffetById(idBuffet);
-//
-//		Piatto piattoDaRimuovere = this.piattoService.getPiattoById(idPiatto);
-//		
-//		for (Piatto secPiatto : buffet.getSecondiPiatti()) {
-//			if (secPiatto.getNome().equals(piattoDaRimuovere.getNome()))
-//				buffet.getSecondiPiatti().remove(secPiatto);
-//		}
-//		
-//		buffetService.addBuffet(buffet);
-//
-//		return this.modificaBuffet(idBuffet, model);
+		String url = "redirect:/admin/buffet/modificaBuffet/" + idBuffet;
+
+		return url;
+	}
+	
+	@GetMapping(value = "buffet/eliminaDolce/{idBuffet}/{idPiatto}")
+	public String eliminaDolce (@PathVariable Long idBuffet, @PathVariable Long idPiatto, Model model) {
+
+		Buffet buffet = this.buffetService.getBuffetById(idBuffet);
+
+		for (Piatto piatto : buffet.getDolci()) {
+			if (piatto.getId() == idPiatto) {
+				buffet.getDolci().remove(piatto);
+				this.buffetService.addBuffet(buffet);
+				break;
+			}
+		}
+
+		String url = "redirect:/admin/buffet/modificaBuffet/" + idBuffet;
+
+		return url;
 	}
 
 	@GetMapping(value = "buffet/eliminaBuffet/{idBuffet}")
@@ -148,6 +175,8 @@ public class AdminController {
 
 		return "redirect:/admin/buffet";
 	}
+
+	// ----------------------- PIATTI -------------------------------------------------
 
 	@GetMapping(value = "/piatti")
 	public String getPiattiAdmin(Model model) {
@@ -185,10 +214,11 @@ public class AdminController {
 		return this.modificaPiatto(idPiatto, model);
 	}
 
+	
 	@GetMapping(value = "piatti/eliminaPiatto/{idPiatto}")
 	public String eliminaPiatto(@PathVariable Long idPiatto, Model model) {
 
-//		Forse andrebbe fatto nel Service
+		// Forse andrebbe fatto nel Service
 		for (Buffet buffet : this.buffetService.getBuffets()) {
 			for (Piatto piatto : buffet.getPrimiPiatti()) {
 				if (piatto.getId() == idPiatto) {
@@ -217,20 +247,21 @@ public class AdminController {
 
 		return "redirect:/admin/piatti";
 	}
-	
-	
-	@GetMapping (value = "/ingredienti")
-	public String getIngredienti (Model model) {
-		
+
+	// ----------------------- INGREDIENTI ----------------------------------------------------------------
+
+	@GetMapping(value = "/ingredienti")
+	public String getIngredienti(Model model) {
+
 		model.addAttribute("ingredienti", this.ingredientiService.getIngredienti());
-		
+
 		return "admin/ingredientiAdmin";
 	}
 
 	@GetMapping(value = "ingredienti/eliminaIngrediente/{idIngrediente}")
 	public String eliminaIngrediente(@PathVariable Long idIngrediente) {
 
-//		Elimino l'ingrediente dalla lista degli ingredienti di tutti i piatti
+		// Elimino l'ingrediente dalla lista degli ingredienti di tutti i piatti
 		for (Piatto piatto : this.piattoService.getPiatti()) {
 			for (Ingrediente ingrediente : piatto.getIngredienti()) {
 				if (ingrediente.getId() == idIngrediente) {
@@ -240,9 +271,9 @@ public class AdminController {
 				}
 			}
 		}
-		
+
 		this.ingredientiService.eliminaIngredienteById(idIngrediente);
-		
+
 		return "redirect:/admin/ingredienti";
 	}
 

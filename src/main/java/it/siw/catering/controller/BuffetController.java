@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import it.siw.catering.model.Buffet;
+import it.siw.catering.model.Chef;
 import it.siw.catering.service.BuffetService;
+import it.siw.catering.service.ChefService;
 
 @Controller
 @RequestMapping("/buffet")
@@ -20,6 +22,9 @@ public class BuffetController {
 
 	@Autowired
 	private BuffetService buffetService;
+	
+	@Autowired
+	private ChefService chefService;
 
 	@RequestMapping("")
 	public String formContattaci(Model model) {
@@ -45,7 +50,16 @@ public class BuffetController {
 
 	@PostMapping("/addBuffet")
 	public String addBuffet(@ModelAttribute("buffet") Buffet buffet, Model model, BindingResult bindingResult) {
-
+		
+//		Controllo prima se lo chef già esiste, in caso lo setto sul buffet (lo chef che ha già un id), così spring lo riconosce
+		Chef chef = this.chefService.getChefByNomeAndCognome(buffet.getChef().getNome(), buffet.getChef().getCognome());
+		
+		if (chef != null) {
+			buffet.setChef(chef);
+		}
+		
+//		In caso non esistesse già, spring aggiunge il nuovo chef al db al db
+		
 		if (!bindingResult.hasErrors()) {
 			this.buffetService.addBuffet(buffet);
 			model.addAttribute("buffets", this.buffetService.getBuffets());

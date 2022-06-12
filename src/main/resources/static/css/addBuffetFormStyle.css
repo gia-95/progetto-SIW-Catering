@@ -82,3 +82,18 @@ button:focus {
   .justify-content-end {
     justify-content: center !important;
   }
+
+.accorcia1{
+    width: 450px;
+}
+
+  .accorcia2 {
+    margin-left: -130px;
+    width: 300px;
+  }
+
+  .accorcia3 {
+    margin-left: -160px;
+    width: 300px;
+  } 
+
