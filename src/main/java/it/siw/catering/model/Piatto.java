@@ -24,7 +24,7 @@ public class Piatto {
 	
 	private String urlImg;
 
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Ingrediente> ingredienti;
 	
 	public Piatto(String nome) {

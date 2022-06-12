@@ -31,15 +31,21 @@ public class PiattoService {
 		Piatto piattoSaved = this.piattoRepository.save(piatto);
 		return piattoSaved != null;
 	}
-	
+
 	public Piatto getPiattoByNome(String nomePiatto) {
-		
+
 		return this.piattoRepository.findByNome(nomePiatto).get();
 	}
 
-	public Piatto getPiattoById (Long idPiatto ) {
-		
+	public Piatto getPiattoById(Long idPiatto) {
+
 		return this.piattoRepository.findById(idPiatto).get();
 	}
-	
+
+	public void deletePiattoById(Long idPiatto) {
+
+//		Dovresti fare un controllo e restituire un booleano
+		this.piattoRepository.deleteById(idPiatto);
+	}
+
 }

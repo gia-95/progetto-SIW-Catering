@@ -32,6 +32,15 @@ public class IngredientiService {
 		return ingredienteSaved != null;
 	}
 	
+	public Ingrediente getIngredienteByNome (String nomeIngrediente) {
+		
+		return this.ingredienteRepository.findByNome(nomeIngrediente).get();
+	}
+	
+	public void eliminaIngredienteById (Long idIngrediente) {
+		
+		this.ingredienteRepository.deleteById(idIngrediente);
+	}
 	
 
 }

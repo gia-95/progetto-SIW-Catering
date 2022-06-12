@@ -1,9 +1,13 @@
 package it.siw.catering.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Ingrediente {
@@ -17,8 +21,8 @@ public class Ingrediente {
 	private String descrizione;
 	
 	private String urlImg;
-	
-	public Ingrediente() {	}
+
+	public Ingrediente() {}
 
 	public Ingrediente(String nome) {
 		this.nome =  nome;
@@ -56,6 +60,5 @@ public class Ingrediente {
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-
 
 }

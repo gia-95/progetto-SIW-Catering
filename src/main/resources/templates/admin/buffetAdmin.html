@@ -55,7 +55,7 @@
                     </div>
                     <div class="votazioni">                         			<!-- "admin/" gia lo aggiunge lui -->
                         <div class="bottoni"><a class="btn btn-warning espandi" th:href="@{buffet/modificaBuffet/{id}(id=${buffet.id})}" role="button">Modifica</a></div>
-                        <div class="bottoni"><a class="btn btn-danger espandi" href="#" role="button">Elimina</a>
+                        <div class="bottoni"><a class="btn btn-danger espandi" th:href="@{buffet/eliminaBuffet/{id}(id=${buffet.id})}" role="button">Elimina</a>
                         </div>
 
                     </div>

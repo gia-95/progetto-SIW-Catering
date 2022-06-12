@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <title>Ingredienti</title>
+
+    <link rel="stylesheet" href="../css/admin/ingredientiAdminStyle.css">
+
+</head>
+
+<body>
+
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4" th:each="ingrediente : ${ingredienti}">
+                <div class="card p-3">
+                    <div class="immagineIngrediente"
+                        style="background-image: url(https://static.cookist.it/wp-content/uploads/sites/21/2020/05/6-falsi-miti-sulle-uova.jpg);">
+                    </div>
+                    <div class="descrizoneIngrediente">
+                        <h5>
+                            <div class="titolo" th:text="${ingrediente.nome}">
+                                Uova
+                            </div>
+                        </h5>
+                        <div class="descrizione" th:text="${ingrediente.descrizione}">Descrizione Ingredienteeeeeeeeeeeeeeeeeeee</div>
+                    </div>
+                    <div class="bottone">
+                        <a class="btn btn-danger espandi" th:href="@{ingredienti/eliminaIngrediente/{id}(id=${ingrediente.id})}" role="button">X</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>
