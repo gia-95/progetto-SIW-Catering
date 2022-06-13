@@ -1,42 +1,181 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <title>Aggiungi Piatto</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+<meta charset="UTF-8">
+<title>Aggiungi Piatto</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+	crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="../css/addPiattoFormStyle.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Cookie&family=Lobster&display=swap"
+	rel="stylesheet">
+
+<link rel="stylesheet" href="../css/addPiattoFormStyle.css">
 </head>
 <body>
 
-    <div class="container-fluid px-1 py-5 mx-auto">
-        <div class="row d-flex justify-content-center">
-            <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-                <h4 >C'è stato un errore nel salvataggio del buffet</h4>
-                <div class="card">
-                    <h3 class="text-center mb-4">Agggiungi un nuovo piatto</h3>
-                    <!-- LA 'ACTION' DEL FORM E' DA CAMBIARE; DEVI METTERLO SOTTO IL PATH 'ADMIN' QUANDO LO FARAI-->
-                    <!-- Quando viene aggiunto il buffet, mi risposto sulla pagina di tutti i buffet, -> dovrei visalizzare il nuovo buffet-->
-                    <form class="form-card" th:action="@{/piatti/addPiatto}" method="POST" th:object="${piatto}">
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Nome Buffet<span class="text-danger"> *</span></label> <input type="text" th:field="*{nome}" id="fname" name="fname" placeholder="Aggiungi nome del buffet"> </div>
-                        </div>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Link immagine Buffet<span class="text-danger"> *</span></label> <input type="text" th:field="*{urlImg}" id="ans" name="ans" placeholder="Link immagine (.JPG / .PNG)"> </div>
-                        </div>
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Descrizione del buffet<span class="text-danger"> *</span></label> <input type="text" th:field="*{descrizione}" id="ans" name="ans" placeholder="" onblur="validate(6)"> </div>
-                        </div>
-                        <div class="row justify-content-end">
-                            <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Conferma</button> </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+
+
+	<nav class="navbar navbar-expand-lg bg-light">
+		<div class="container-fluid">
+			<a class="navbar-brand immagine-home" href="/"
+				style="background-image: url(https://img.icons8.com/ios-filled/344/home.png);"></a>
+			<a class="navbar-brand">Catering Marini</a>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="/buffet">I Nostri Buffet</a></li>
+					<div class="navbarra">|</div>
+					<li class="nav-item"><a class="nav-link" href="/piatti">
+							Piatti</a></li>
+					<div class="navbarra">|</div>
+					<li class="nav-item"><a class="nav-link" href="/ingredienti">Ingredienti</a>
+					</li>
+					<div class="navbarra">|</div>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownMenuLink" role="button"
+						data-bs-toggle="dropdown" aria-expanded="false"> Area Privata
+					</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+									  <li><a class="dropdown-item" href="/admin">Amministrazione</a></li>
+			  <li><a class="dropdown-item" href="/chef">I nostri Chef</a></li>
+							<li><a class="dropdown-item" href="/buffet/addBuffet">Aggiungi
+									buffet</a></li>
+							<li><a class="dropdown-item" href="/piatti/addPiatto">Aggiungi
+									Piatto</a></li>
+							<li><a class="dropdown-item"
+								href="/ingredienti/addIngrediente">Aggiungi ingrediente</a></li>
+							<li><a class="dropdown-item" href="admin/buffet">BuffetAdmin</a></li>
+							<li><a class="dropdown-item" href="admin/piatti">Piatti
+									admin</a></li>
+							<li><a class="dropdown-item" href="admin/ingredienti">Ingredienti
+									admin</a></li>
+
+
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container-fluid px-1 py-5 mx-auto">
+		<div class="row d-flex justify-content-center">
+			<div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+				<h4>C'è stato un errore nel salvataggio del buffet</h4>
+				<div class="card">
+					<h3 class="text-center mb-4">Agggiungi un nuovo piatto</h3>
+					<!-- LA 'ACTION' DEL FORM E' DA CAMBIARE; DEVI METTERLO SOTTO IL PATH 'ADMIN' QUANDO LO FARAI-->
+					<!-- Quando viene aggiunto il buffet, mi risposto sulla pagina di tutti i buffet, -> dovrei visalizzare il nuovo buffet-->
+					<form class="form-card" th:action="@{/piatti/addPiatto}"
+						method="POST" th:object="${piatto}">
+						<div class="row justify-content-between text-left">
+							<div class="form-group col-sm-6 flex-column d-flex">
+								<label class="form-control-label px-3">Nome Buffet<span
+									class="text-danger"> *</span></label> <input type="text"
+									th:field="*{nome}" id="fname" name="fname"
+									placeholder="Aggiungi nome del buffet">
+							</div>
+						</div>
+						<div class="row justify-content-between text-left">
+							<div class="form-group col-12 flex-column d-flex">
+								<label class="form-control-label px-3">Link immagine
+									Buffet<span class="text-danger"> *</span>
+								</label> <input type="text" th:field="*{urlImg}" id="ans" name="ans"
+									placeholder="Link immagine (.JPG / .PNG)">
+							</div>
+						</div>
+						<div class="row justify-content-between text-left">
+							<div class="form-group col-12 flex-column d-flex">
+								<label class="form-control-label px-3">Descrizione del
+									buffet<span class="text-danger"> *</span>
+								</label> <input type="text" th:field="*{descrizione}" id="ans"
+									name="ans" placeholder="" onblur="validate(6)">
+							</div>
+						</div>
+						<div class="row justify-content-end">
+							<div class="form-group col-sm-6">
+								<button type="submit" class="btn-block btn-primary">Conferma</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div
+		class="container-fluid2 pb-0 mb-0 justify-content-center text-light ">
+		<footer>
+			<div class="row3 my-5 justify-content-center py-5">
+				<div class="col-11">
+					<div class="row3 ">
+						<div
+							class="col-xl-8 col-md-42 col-sm-4 col-12   my-auto mx-auto a">
+							<h3 class="text-muted mb-md-0 mb-5 bold-text">Progetto SIW
+								Catering.</h3>
+						</div>
+						<div class="col-xl-2 col-md-42 col-sm-4 col-12">
+							<h6 class="mb-32 mb-lg-4 bold-text ">
+								<b>MENU</b>
+							</h6>
+							<ul class="list-unstyled">
+								<li><a href="/">HOME</a></li>
+								<li><a href="/">About</a></li>
+							</ul>
+						</div>
+						<div class="col-xl-2 col-md-42 col-sm-4 col-12">
+							<h6 class="mb-32 mb-lg-4 text-muted bold-text mt-sm-0 mt-5">
+								<b>INDIRIZZO</b>
+							</h6>
+							<p class="mb-1">Via I Laziali Da Roma, 130</p>
+							<p>ROMA, ITALIA</p>
+						</div>
+					</div>
+					<div class="row3 rimp ">
+						<div
+							class="col-xl-8 col-md-42 col-sm-4 col-auto  my-md-0 mt-5 order-sm-1 order-3 align-self-end">
+							<p class="social text-muted mb-0 pb-0 bold-text">
+								<span class="mx-2"><i class="fa fa-facebook"
+									aria-hidden="true"></i></span> <span class="mx-2"><i
+									class="fa fa-linkedin-square" aria-hidden="true"></i></span> <span
+									class="mx-2"><i class="fa fa-twitter" aria-hidden="true"></i></span>
+								<span class="mx-2"><i class="fa fa-instagram"
+									aria-hidden="true"></i></span>
+							</p>
+							<small class="rights"><span>&#174;</span> Gianluca Marini
+								All Rights Reserved.</small>
+						</div>
+						<div
+							class="col-xl-2 col-md-42 col-sm-4 col-auto order-1 align-self-end ">
+							<h6 class="mt-55 mt-2 text-muted bold-text">
+								<b>EMAIL</b>
+							</h6>
+							<small> <span><i class="fa fa-envelope"
+									aria-hidden="true"></i></span> catering_marini@gmail.com
+							</small>
+						</div>
+						<div
+							class="col-xl-2 col-md-42 col-sm-4 col-auto order-2 align-self-end mt-3   ">
+							<h6 class="text-muted bold-text">
+								<b>AMMINISTRAZIONE</b>
+							</h6>
+							<small><span><i class="fa fa-envelope"
+									aria-hidden="true"></i></span> amministrazione_catering@gmail.com</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+
 </body>
 </html>

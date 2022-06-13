@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Lobster&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/loginFormStyle.css">
+    <link rel="stylesheet" href="../css/chefStyle.css">
 
 </head>
 
@@ -45,8 +44,6 @@
                             Area Privata
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        			  <li><a class="dropdown-item" href="/admin">Amministrazione</a></li>
-			  <li><a class="dropdown-item" href="/chef">I nostri Chef</a></li>
                             <li><a class="dropdown-item" href="/buffet/addBuffet">Aggiungi buffet</a></li>
                             <li><a class="dropdown-item" href="/piatti/addPiatto">Aggiungi Piatto</a></li>
                             <li><a class="dropdown-item" href="/ingredienti/addIngrediente">Aggiungi ingrediente</a>
@@ -63,29 +60,24 @@
         </div>
     </nav>
 
+<div class="nostriChef">I Nostri Chef</div>
 
     <div class="container">
-        <div class="row d-flex justify-content-center mt-5">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div class="card py-3 px-2">
-                    <p class="text-center mb-3 mt-2">ACCEDI AMMINISTRAZIONE</p>
-                    <form class="myform" th:action="@{/login}" method="POST">
-                        <div class="form-group">
-                            <input name="username" type="text" required class="form-control" placeholder="Username">
-                          </div>
-                         <div class="form-group">
-                            <input name="password" type="password" required class="form-control" placeholder="Password">
-                          </div>
-                          <div class="form-group mt-3">
-                              <button type="submit" class="btn btn-block btn-primary btn-lg"><div class="bottoneLogin">LOGIN</div></button>
-                          </div>
-                    </form>
+        <div class="row">
+            <div class="col-lg-4" th:each="chef : ${chefs}">
+                <div class="card p-0">
+                    <div class="card-image" th:style="${chef.urlImg}">
+                        <img src=""
+                            alt="">
+                    </div>
+                    <div class="card-content d-flex flex-column align-items-center">
+                      <b>  <h4 class="pt-2" th:text="${chef.nome} +' ' + ${chef.cognome}">Mario Rossi</h4></b>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
-
-
 
 
     <div class="container-fluid2 pb-0 mb-0 justify-content-center text-light ">
@@ -137,37 +129,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-<!--  
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<body>
-	<header ></header>
-	<div>
-		<h4>Login</h4>
-	</div>
-	<form th:action="@{/login}" method="POST">
-		<div>
-			<div>
-				<span>Username:</span>
-				<span><input name="username" type="text" required /></span>
-			</div>		
-			<div>
-				<span>Password:</span>
-				<span><input name="password" type="password" required /></span>
-			</div>
-			<div>
-				<span><button type="submit">Login</button></span>
-			</div>
-		</div>
-	</form>
-    <footer ></footer>
-</body>
-</html>
-
--->

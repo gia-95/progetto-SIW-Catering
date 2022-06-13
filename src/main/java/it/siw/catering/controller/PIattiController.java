@@ -48,6 +48,10 @@ public class PIattiController {
 	@PostMapping("/addPiatto")
 	public String addPiatto(@ModelAttribute("piatto") Piatto piatto, Model model, BindingResult bindingResult) {
 
+		String urlImmagine = "background-image: url(" + piatto.getUrlImg() + ");";
+		piatto.setUrlImg(urlImmagine);
+		
+		
 		if (!bindingResult.hasErrors()) {
 			this.piattoService.addPiatto(piatto);
 			return "redirect:/piatti";

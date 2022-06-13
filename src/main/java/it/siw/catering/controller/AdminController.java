@@ -32,6 +32,13 @@ public class AdminController {
 
 	@Autowired
 	private IngredientiService ingredientiService;
+	
+
+	@GetMapping ("")
+	public String homeAdmin () {
+		
+		return "admin/homeAdmin";
+	}
 
 	// ----------------------- BUFFET ----------------------------------------------------------------
 

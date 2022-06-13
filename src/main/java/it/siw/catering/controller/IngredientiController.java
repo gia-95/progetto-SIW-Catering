@@ -47,6 +47,9 @@ public class IngredientiController {
 	@PostMapping("/addIngrediente")
 	public String addIngrediente (@ModelAttribute("ingrediente") Ingrediente ingrediente, Model model, BindingResult bindingResult) {
 		
+		String urlImmagine = "background-image: url(" + ingrediente.getUrlImg() + ");";
+		ingrediente.setUrlImg(urlImmagine);
+		
 		if (!bindingResult.hasErrors()) {
 			this.ingredientiService.addIngrediente(ingrediente);
 			return "redirect:/ingredienti";

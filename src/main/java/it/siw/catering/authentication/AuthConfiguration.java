@@ -50,8 +50,8 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 
 
 		// solo gli utenti autenticati con ruolo ADMIN possono accedere a risorse con path /admin/**
-//		.antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
-//		.antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
+		.antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
+		.antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
 		
 		
 		.antMatchers(HttpMethod.GET , "/**").permitAll()  //--> LI METTO DOPO PERCHé VA IN ORDINE
@@ -67,7 +67,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 		// NOTA: Spring gestisce il post di login automaticamente
 		.loginPage("/login")
 		// se il login ha successo, si viene rediretti al path /default
-		.defaultSuccessUrl("/default")
+		.defaultSuccessUrl("/admin")
 
 		// logout paragraph: qui definiamo il logout
 		.and().logout()

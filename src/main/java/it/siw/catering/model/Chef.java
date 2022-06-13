@@ -20,6 +20,9 @@ public class Chef {
 	
 	private String cognome;
 	
+	private String urlImg;
+
+	
 	@OneToMany (mappedBy = "chef", cascade = CascadeType.ALL)
 	private List<Buffet> buffet;
 
@@ -54,6 +57,16 @@ public class Chef {
 	public void setBuffet(List<Buffet> buffet) {
 		this.buffet = buffet;
 	}
+
+	public String getUrlImg() {
+		return urlImg;
+	}
+
+	public void setUrlImg(String urlImg) {
+		this.urlImg = urlImg;
+	}
+
+
 	
 	
 }

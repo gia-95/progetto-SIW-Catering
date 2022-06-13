@@ -8,28 +8,76 @@
 
   <title>Document</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Lobster&display=swap" rel="stylesheet">
+
+
   <link rel="stylesheet" href="css/buffetStyle.css">
 
 </head>
 
 <body>
 
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand immagine-home" href="/"
+        style="background-image: url(https://img.icons8.com/ios-filled/344/home.png);"></a>
+      <a class="navbar-brand">Catering Marini</a>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/buffet">I Nostri Buffet</a>
+          </li>
+          <div class="navbarra">|</div>
+          <li class="nav-item">
+            <a class="nav-link" href="/piatti"> Piatti</a>
+          </li>
+          <div class="navbarra">|</div>
+          <li class="nav-item">
+            <a class="nav-link" href="/ingredienti">Ingredienti</a>
+          </li>
+          <div class="navbarra">|</div>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Area Privata
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            			  <li><a class="dropdown-item" href="/admin">Amministrazione</a></li>
+			  <li><a class="dropdown-item"href="/chef">I nostri Chef</a></li>
+              <li><a class="dropdown-item" href="/buffet/addBuffet">Aggiungi buffet</a></li>
+              <li><a class="dropdown-item" href="/piatti/addPiatto">Aggiungi Piatto</a></li>
+              <li><a class="dropdown-item" href="/ingredienti/addIngrediente">Aggiungi ingrediente</a></li>
+              <li><a class="dropdown-item" href="admin/buffet">BuffetAdmin</a></li>
+              <li><a class="dropdown-item" href="admin/piatti">Piatti admin</a></li>
+              <li><a class="dropdown-item" href="admin/ingredienti">Ingredienti admin</a></li>
+
+
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
 
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-4" th:each="buffet : ${buffets}">
         <div class="card p-3">
-          <div class="d-flex flex-row mb-3" style="background-image: url(https://www.prezzisalute.com/img/cibo/alimenti/salumi_m.jpg);">
+          <div class="d-flex flex-row mb-3"
+            th:style="${buffet.urlImg}">
           </div>
           <div class="titoloBuffet">
-            <h4 th:text="${buffet.nome}">Buffet di terra</h6>
+            <div th:text="${buffet.nome}">Buffet di terra</div>
           </div>
           <div class="chef">
-            <span>Chef:</span>
-            <span th:if="${buffet.chef}" th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}">Mario</span>
+            <span><b>Chef: </b></span>
+            <span class="chef-io" th:if="${buffet.chef}" th:text="'  '+${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}">Mario</span>
           </div>
           <div class="primi">
-            <h6>Primi piatti:</h6>
+            <h6><b>• Primi piatti </b></h6>
             <div class="elencoPiatti">
               <div th:each="piatto : ${buffet.primiPiatti}">
                 <span th:text="${piatto.nome}+','+' '">Piatto</span>
@@ -37,7 +85,7 @@
             </div>
           </div>
           <div class="secondi">
-            <h6>Secondi piatti:</h6>
+            <h6><b>• Secondi piatti</b></h6>
             <div class="elencoPiatti">
               <div th:each="piatto : ${buffet.secondiPiatti}">
                 <span th:text="${piatto.nome}+','+' '">Piatto</span>
@@ -46,7 +94,7 @@
           </div>
 
           <div class="secondi">
-            <h6>Dolci:</h6>
+            <h6> <b>• Dolci: </b></h6>
             <div class="elencoPiatti">
               <div th:each="piatto : ${buffet.dolci}">
                 <span th:text="${piatto.nome}+','+' '">Piatto</span>
@@ -87,9 +135,56 @@
         </div>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
-    </script>
+  </div>
+
+
+
+  <div class="container-fluid2 pb-0 mb-0 justify-content-center text-light ">
+    <footer>
+      <div class="row3 my-5 justify-content-center py-5">
+        <div class="col-11">
+          <div class="row3 ">
+            <div class="col-xl-8 col-md-42 col-sm-4 col-12   my-auto mx-auto a">
+              <h3 class="text-muted mb-md-0 mb-5 bold-text">Progetto SIW Catering.</h3>
+            </div>
+            <div class="col-xl-2 col-md-42 col-sm-4 col-12">
+              <h6 class="mb-32 mb-lg-4 bold-text "><b>MENU</b></h6>
+              <ul class="list-unstyled">
+                <li><a href="/">HOME</a></li>
+                <li><a href="/">About</a></li>
+              </ul>
+            </div>
+            <div class="col-xl-2 col-md-42 col-sm-4 col-12">
+              <h6 class="mb-32 mb-lg-4 text-muted bold-text mt-sm-0 mt-5"><b>INDIRIZZO</b></h6>
+              <p class="mb-1">Via I Laziali Da Roma, 130</p>
+              <p>ROMA, ITALIA</p>
+            </div>
+          </div>
+          <div class="row3 rimp ">
+            <div class="col-xl-8 col-md-42 col-sm-4 col-auto  my-md-0 mt-5 order-sm-1 order-3 align-self-end">
+              <p class="social text-muted mb-0 pb-0 bold-text"> <span class="mx-2"><i class="fa fa-facebook"
+                    aria-hidden="true"></i></span> <span class="mx-2"><i class="fa fa-linkedin-square"
+                    aria-hidden="true"></i></span> <span class="mx-2"><i class="fa fa-twitter"
+                    aria-hidden="true"></i></span> <span class="mx-2"><i class="fa fa-instagram"
+                    aria-hidden="true"></i></span> </p><small class="rights"><span>&#174;</span> Gianluca Marini All
+                Rights Reserved.</small>
+            </div>
+            <div class="col-xl-2 col-md-42 col-sm-4 col-auto order-1 align-self-end ">
+              <h6 class="mt-55 mt-2 text-muted bold-text"><b>EMAIL</b></h6><small> <span><i class="fa fa-envelope"
+                    aria-hidden="true"></i></span> catering_marini@gmail.com</small>
+            </div>
+            <div class="col-xl-2 col-md-42 col-sm-4 col-auto order-2 align-self-end mt-3   ">
+              <h6 class="text-muted bold-text"><b>AMMINISTRAZIONE</b></h6><small><span><i class="fa fa-envelope"
+                    aria-hidden="true"></i></span> amministrazione_catering@gmail.com</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+  </script>
 </body>
 
 </html>
