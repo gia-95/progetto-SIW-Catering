@@ -46,7 +46,7 @@ public class AdminController {
 	public String getBuffet(Model model) {
 
 		model.addAttribute("buffets", this.buffetService.getBuffets());
-
+		System.out.println();
 		return "admin/buffetAdmin";
 	}
 
