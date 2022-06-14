@@ -66,7 +66,7 @@ public class PIattiController {
 		
 		if (!bindingResult.hasErrors()) {
 			this.piattoService.addPiatto(piatto);
-			return "redirect:/piatti";
+			return "redirect:../admin/piatti";
 		}
 		return "addPiattoForm";
 	}

@@ -90,7 +90,7 @@ public class BuffetController {
 		if (!bindingResult.hasErrors()) {
 			this.buffetService.addBuffet(buffet);
 			model.addAttribute("buffets", this.buffetService.getBuffets());
-			return "redirect:/buffet";
+			return "redirect:../admin/buffet";
 		}
 		return "addBuffetForm";
 	}

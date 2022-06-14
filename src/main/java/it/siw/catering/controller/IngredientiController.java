@@ -63,7 +63,7 @@ public class IngredientiController {
 		
 		if (!bindingResult.hasErrors()) {
 			this.ingredientiService.addIngrediente(ingrediente);
-			return "redirect:/ingredienti";
+			return "redirect:../admin/ingredienti";
 		}
 		return "addIngredienteForm";
 	}
