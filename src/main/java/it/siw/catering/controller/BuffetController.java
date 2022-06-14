@@ -15,6 +15,8 @@ import it.siw.catering.model.Buffet;
 import it.siw.catering.model.Chef;
 import it.siw.catering.service.BuffetService;
 import it.siw.catering.service.ChefService;
+import it.siw.catering.validator.BuffetValidator;
+import it.siw.catering.validator.ChefValidator;
 
 @Controller
 @RequestMapping("/buffet")
@@ -25,6 +27,12 @@ public class BuffetController {
 
 	@Autowired
 	private ChefService chefService;
+	
+	@Autowired 
+	BuffetValidator buffetValidator;
+	
+	@Autowired 
+	ChefValidator chefValidator;
 
 	@RequestMapping("")
 	public String formContattaci(Model model) {
@@ -42,6 +50,7 @@ public class BuffetController {
 
 	@GetMapping("/addBuffet")
 	public String addBuffet(Model model) {
+		
 
 		model.addAttribute("buffet", new Buffet());
 
@@ -50,6 +59,15 @@ public class BuffetController {
 
 	@PostMapping("/addBuffet")
 	public String addBuffet(@ModelAttribute("buffet") Buffet buffet, Model model, BindingResult bindingResult) {
+		
+		buffetValidator.validate(buffet, bindingResult);
+		chefValidator.validate(buffet.getChef(), bindingResult);
+		
+		if (bindingResult.hasErrors()) {
+			System.out.println();
+			model.addAttribute("buffet", buffet);
+			return "addBuffetForm";
+		}
 
 		//		Controllo prima se lo chef già esiste, in caso lo setto sul buffet (lo chef che ha già un id), così spring lo riconosce
 		Chef chef = this.chefService.getChefByNomeAndCognome(buffet.getChef().getNome(), buffet.getChef().getCognome());

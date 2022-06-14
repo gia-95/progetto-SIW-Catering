@@ -254,6 +254,25 @@ public class AdminController {
 
 		return "redirect:/admin/piatti";
 	}
+	
+	@GetMapping(value = "piatti/eliminaIngrediente/{idPiatto}/{idIngrediente}")
+	public String eliminaIngrediente (@PathVariable Long idPiatto, @PathVariable Long idIngrediente, Model model) {
+
+		Piatto piatto = this.piattoService.getPiattoById(idPiatto);
+
+		for (Ingrediente i : piatto.getIngredienti()) {
+			if (i.getId() == idIngrediente) {
+				piatto.getIngredienti().remove(i);
+				this.piattoService.addPiatto(piatto);
+				break;
+			}
+		}
+
+		String url = "redirect:/admin/piatti/modificaPiatto/" + idPiatto;
+
+		return url;
+	}
+
 
 	// ----------------------- INGREDIENTI ----------------------------------------------------------------
 

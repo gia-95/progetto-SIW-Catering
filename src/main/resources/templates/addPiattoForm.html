@@ -48,17 +48,6 @@
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 									  <li><a class="dropdown-item" href="/admin">Amministrazione</a></li>
 			  <li><a class="dropdown-item" href="/chef">I nostri Chef</a></li>
-							<li><a class="dropdown-item" href="/buffet/addBuffet">Aggiungi
-									buffet</a></li>
-							<li><a class="dropdown-item" href="/piatti/addPiatto">Aggiungi
-									Piatto</a></li>
-							<li><a class="dropdown-item"
-								href="/ingredienti/addIngrediente">Aggiungi ingrediente</a></li>
-							<li><a class="dropdown-item" href="admin/buffet">BuffetAdmin</a></li>
-							<li><a class="dropdown-item" href="admin/piatti">Piatti
-									admin</a></li>
-							<li><a class="dropdown-item" href="admin/ingredienti">Ingredienti
-									admin</a></li>
 
 
 						</ul></li>
@@ -69,7 +58,6 @@
 	<div class="container-fluid px-1 py-5 mx-auto">
 		<div class="row d-flex justify-content-center">
 			<div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-				<h4>C'è stato un errore nel salvataggio del buffet</h4>
 				<div class="card">
 					<h3 class="text-center mb-4">Agggiungi un nuovo piatto</h3>
 					<!-- LA 'ACTION' DEL FORM E' DA CAMBIARE; DEVI METTERLO SOTTO IL PATH 'ADMIN' QUANDO LO FARAI-->
@@ -77,6 +65,9 @@
 					<form class="form-card" th:action="@{/piatti/addPiatto}"
 						method="POST" th:object="${piatto}">
 						<div class="row justify-content-between text-left">
+						<div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
+								<b></b><p th:each="err : ${#fields.globalErrors()}" th:text="${err}">Errore globale</p></b>
+							</div>
 							<div class="form-group col-sm-6 flex-column d-flex">
 								<label class="form-control-label px-3">Nome Buffet<span
 									class="text-danger"> *</span></label> <input type="text"
@@ -87,7 +78,7 @@
 						<div class="row justify-content-between text-left">
 							<div class="form-group col-12 flex-column d-flex">
 								<label class="form-control-label px-3">Link immagine
-									Buffet<span class="text-danger"> *</span>
+									Buffet<span class="text-danger"> </span>
 								</label> <input type="text" th:field="*{urlImg}" id="ans" name="ans"
 									placeholder="Link immagine (.JPG / .PNG)">
 							</div>

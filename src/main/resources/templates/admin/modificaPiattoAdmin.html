@@ -47,17 +47,7 @@
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 									  <li><a class="dropdown-item" href="/admin">Amministrazione</a></li>
 			  <li><a class="dropdown-item" href="/chef">I nostri Chef</a></li>
-							<li><a class="dropdown-item" href="/buffet/addBuffet">Aggiungi
-									buffet</a></li>
-							<li><a class="dropdown-item" href="/piatti/addPiatto">Aggiungi
-									Piatto</a></li>
-							<li><a class="dropdown-item"
-								href="/ingredienti/addIngrediente">Aggiungi ingrediente</a></li>
-							<li><a class="dropdown-item" href="admin/buffet">BuffetAdmin</a></li>
-							<li><a class="dropdown-item" href="admin/piatti">Piatti
-									admin</a></li>
-							<li><a class="dropdown-item" href="admin/ingredienti">Ingredienti
-									admin</a></li>
+
 
 
 						</ul></li>
@@ -82,7 +72,7 @@
 			</div>
 			<div class="bottone-fine">
 				<div class="bottoni">
-					<a class="btn btn-danger espandi" href="#" role="button">Rimuovi</a>
+					<a class="btn btn-danger espandi" th:href="@{../eliminaIngrediente/{idP}/{idI}(idP=${piatto.id}, idI=${ingrediente.id})}" role="button">Rimuovi</a>
 				</div>
 			</div>
 		</div>

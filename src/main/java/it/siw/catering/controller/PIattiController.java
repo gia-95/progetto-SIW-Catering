@@ -17,6 +17,7 @@ import it.siw.catering.model.Ingrediente;
 import it.siw.catering.model.Piatto;
 import it.siw.catering.repository.IngredienteRepository;
 import it.siw.catering.service.PiattoService;
+import it.siw.catering.validator.PiattoController;
 
 @Controller
 @RequestMapping("/piatti")
@@ -24,6 +25,9 @@ public class PIattiController {
 
 	@Autowired
 	private PiattoService piattoService;
+	
+	@Autowired
+	private PiattoController piattoController;
 
 	@GetMapping("")
 	public String mostraPiatti(Model model) {
@@ -47,6 +51,14 @@ public class PIattiController {
 
 	@PostMapping("/addPiatto")
 	public String addPiatto(@ModelAttribute("piatto") Piatto piatto, Model model, BindingResult bindingResult) {
+		
+		this.piattoController.validate(piatto, bindingResult);
+		
+		if (bindingResult.hasErrors()) {
+			System.out.println();
+			model.addAttribute("piatto", piatto);
+			return "addPiattoForm";
+		}
 
 		String urlImmagine = "background-image: url(" + piatto.getUrlImg() + ");";
 		piatto.setUrlImg(urlImmagine);

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import it.siw.catering.model.Ingrediente;
 import it.siw.catering.model.Piatto;
 import it.siw.catering.service.IngredientiService;
+import it.siw.catering.validator.IngredienteValidator;
 
 @Controller
 @RequestMapping("/ingredienti")
@@ -22,6 +23,9 @@ public class IngredientiController {
 
 	@Autowired
 	private IngredientiService ingredientiService;
+	
+	@Autowired
+	private IngredienteValidator ingredienteValidator;
 
 	@GetMapping("")
 	public String getIngredienti(Model model) {
@@ -46,6 +50,13 @@ public class IngredientiController {
 	
 	@PostMapping("/addIngrediente")
 	public String addIngrediente (@ModelAttribute("ingrediente") Ingrediente ingrediente, Model model, BindingResult bindingResult) {
+		
+		this.ingredienteValidator.validate(ingrediente, bindingResult);
+		
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("ingrediente", ingrediente);
+			return "addIngredienteForm";
+		}
 		
 		String urlImmagine = "background-image: url(" + ingrediente.getUrlImg() + ");";
 		ingrediente.setUrlImg(urlImmagine);
